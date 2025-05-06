@@ -1,0 +1,3 @@
+# Download audio from YouTube
+# `-x` extracts the song, `-o` chooses the directory, `%(title)s` uses the YouTube video title for the file name.
+ytdlp -x -o 'dir/%(title)s.opus' --audio-format wav

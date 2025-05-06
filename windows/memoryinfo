@@ -1,0 +1,2 @@
+# Get memory info
+wmic memorychip list full

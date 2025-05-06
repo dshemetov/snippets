@@ -1,0 +1,13 @@
+# Delete local branches that are deleted remotely
+git fetch --prune <remote>
+
+# Find what remote each branch tracks
+git branch -vv
+# Change remote the branch tracks
+git branch branch_name --set-upstream-to new_remote/branch_name
+
+# Find branches a commit is on
+git branch -a --contains <commit>
+
+# Find commits branch-X has that master doesn't
+git log master..branch-X

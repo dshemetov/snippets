@@ -1,0 +1,27 @@
+# Print current date in various formats
+date --iso-8601=seconds
+
+# Date arithmetic (from now)
+date --date="next Friday" --iso-8601=seconds
+date --date="3 months 3 hours"
+
+# ISO week number
+date +%V
+
+# Day of year
+date +%j
+
+# ISO date
+date "+%Y-%m-%d, %A"
+
+# Count Mondays between two dates (inclusive). If you want something faster,
+# find nearest Monday after start and nearest Monday before end, then count
+# weeks.
+count=0;
+lo="2024-12-01";
+hi="2024-12-31";
+while [ "$lo" != "$(date -I -d "$hi + 1 day")" ];
+    do [ "$(date -d "$lo" +%u)" -eq 1 ] && ((count++));
+    lo=$(date -I -d "$lo + 1 day");
+done;
+echo "$count"

@@ -1,0 +1,2 @@
+# -m move (remove original), -e (encrypt with password), -r (recursive, directory)
+zip -mer target source

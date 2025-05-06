@@ -1,0 +1,5 @@
+# Cut an mkv file and convert to mp4
+ffmpeg -i example.mkv -t hh:mm:ss -async 1 cut.mp4
+
+# Scale a GIF and convert to mp4
+ffmpeg -i example.gif -vf scale=512:-1 scaled.mp4

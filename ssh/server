@@ -1,0 +1,26 @@
+# On host
+# Install
+sudo apt update && sudo apt install -y openssh-server net-tools
+sudo systemctl status ssh
+
+# Allow SSH through the firewall
+sudo ufw status
+sudo ufw allow ssh
+
+# Add an authorized ssh key
+# Option 1: transfer from client machine (probably use password)
+ssh-copy-id username@host
+# Option 2: SSH into machine and paste the .pub key info in manually (can run
+# into /crlf issues, if copying from Windows)
+sudo paste_info >> ~/.ssh/authorized_keys
+
+# Edit the server config to disable PasswordAuthentication
+sudo vim /etc/ssh/sshd_config
+
+# SSH folder permissions https://superuser.com/a/215506
+
+# On client
+ssh username@ip_address
+
+# To disable
+sudo systemctl disable --now ssh

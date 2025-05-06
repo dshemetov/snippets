@@ -1,0 +1,8 @@
+# To add a key to your identities.
+ssh-add ~/.ssh/id_rsa
+
+# To add to keychain and persist through reboots.
+ssh-add -k ~/.ssh/id_rsa
+
+# Private keys should have permissions set to 600.
+chmod 600 ~/.ssh/id_rsa

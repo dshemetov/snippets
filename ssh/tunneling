@@ -1,0 +1,4 @@
+# TCP Forwarding Through SSH
+# -N does not execute a command
+# -L sets up the forward
+ssh -NL 6667:localhost:6667 user@server.example.com

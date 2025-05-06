@@ -1,0 +1,5 @@
+# Run in local venv without a project
+uv run --no-project script
+
+# Add dependency to script
+uv add --script script.py dep

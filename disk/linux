@@ -1,0 +1,6 @@
+# Check disk usage
+df -h
+
+# Check file and folder sizes
+du -sh file_path
+du -h -d 1 .

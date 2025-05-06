@@ -1,0 +1,10 @@
+# Install AWS CLI
+# https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+# Look at the docs for the s3 command
+# https://docs.aws.amazon.com/cli/latest/reference/s3/
+# Run `aws configure` to set up your credentials
+
+# To copy many files locally.
+# The `--recursive` flag is necessary to do multiple file copying,
+# the `--exclude` and `--include` flags take precedence from right to left.
+aws s3 cp s3://source target --recursive --exclude "*" --include "regex1"

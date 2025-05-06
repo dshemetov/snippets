@@ -1,0 +1,2 @@
+# This pattern I refuse to memorize
+./script >> out.log 2>&1 &

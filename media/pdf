@@ -1,0 +1,14 @@
+# Merge PDFs
+pdftk in1.pdf in2.pdf cat output out.pdf
+
+# Extract text from PDF
+pdftotext in.pdf out.txt
+
+# Add 1in margins to 46in x 34in PDF poster (you don't need --offset, since your
+# content is already centered)
+# (if you have TeXLive, you can install pdfjam with `tlmgr install pdfjam`)
+pdfjam poster.pdf \
+  --outfile poster_with_margins.pdf \
+  --papersize '{48in,36in}' \
+  --noautoscale true \
+  --clip false

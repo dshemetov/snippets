@@ -1,0 +1,15 @@
+# Find files with an extension and preview with bat
+fd -e csv regex path | fzf --preview 'batcat --color=always {}' --preview-window '~3'
+
+# Delete .DS_Store files recursively
+fd -H '^\.DS_Store$' -tf -X rm
+# Delete .DS_Store files in current directory
+fd -H -d 1 '^\.DS_Store$' -tf -X rm
+# ... interactively
+fd -H -d 1 '^\.DS_Store$' -tf -X rm -i
+# Same thing but with find
+find . -maxdepth 1 -name "^\.DS_Store$" -delete
+
+# Search inside python files
+rg -tpy "pattern"
+rg -tpy "pattern" --files-with-matches --no-filename --no-heading --color=always | fzf --preview 'batcat --color=always {}' --preview-window '~3'
