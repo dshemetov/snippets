@@ -1,0 +1,46 @@
+# Rate Calculations Using https://github.com/sharkdp/numbat/
+
+# Factorio Uranium 235 Rate Calculation
+unit uranium
+unit u238
+unit u235
+@aliases(miners)
+unit miner
+@aliases(centrifuges)
+unit centrifuge
+
+let u238_production = 0.993 u238 / 10 uranium
+let u235_production = 0.007 u235 / 10 uranium
+let uranium_rate = 1 uranium / 12 s
+let total_uranium = 40 u235 / u235_production
+print("Expected uranium needed to get 40 U235: {total_uranium -> uranium}")
+let uranium_per_hour_per_miner = (0.29 uranium/s miner) hr
+print("Miners needed to get uranium quota in an hour: {total_uranium / uranium_per_hour_per_miner |> ceil_in(miner)}")
+let uranium_per_hour_per_centrifuge = (10 uranium / 12 s centrifuge) hr
+print("Centrifuges needed to process uranium quota in an hour: {total_uranium / uranium_per_hour_per_centrifuge |> ceil_in(centrifuge)}")
+
+# Compare two approaches to steel plate production.
+# Approach 1: Iron Ore -> Molten Iron -> Iron Plate -> Steel Plate
+# Approach 2: Iron Ore -> Molten Iron -> Steel Plate
+# Approach 1 overtakes at steel productivity level 5 and with full legendary productivity 3 modules.
+# Approach 2 is better at lower levels of steel productivity and module fraction.
+# Magic numbers:
+# - Foundry productivity 0.5
+# - Legendary productivity 3 module bonus 0.25 (4 in foundry, 2 in furnace)
+# - Steel productivity per level 0.1
+unit iron_ore
+unit molten_iron
+unit iron_plate
+unit steel_plate
+fn f1(steel_productivity_level: Scalar, module_fraction: Scalar) -> SteelPlate/IronOre = x
+  where foundry_bonus = (1 + 0.5 + 4 * 0.25 * module_fraction)
+    and furnace_bonus = (1 + 2 * 0.25 * module_fraction + steel_productivity_level * .1)
+    and base_rate = (500 molten_iron / 50 iron_ore) * (2 iron_plate / 20 molten_iron) * (1 steel_plate / 5 iron_plate)
+    and x = base_rate * foundry_bonus ** 2 * furnace_bonus
+fn f2(steel_productivity_level: Scalar, module_fraction: Scalar) -> SteelPlate/IronOre = x
+  where foundry_bonus = (1 + 0.5 + 4 * 0.25 * module_fraction)
+    and foundry_bonus2 = (1 + 0.5 + 4 * 0.25 * module_fraction + steel_productivity_level * .1)
+    and base_rate = (500 molten_iron / 50 iron_ore) * (1 steel_plate / 30 molten_iron)
+    and x = base_rate * foundry_bonus * foundry_bonus2
+print("Steel Plate per Iron Ore (Approach 1): {f1(0, 1)}")
+print("Steel Plate per Iron Ore (Approach 2): {f2(0, 1)}")
