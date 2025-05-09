@@ -1,0 +1,12 @@
+# Specify headers from an HTTP request
+curl -H "Header: Value" http://example.com
+
+# Inspect headers from an HTTP response
+curl -I http://example.com
+
+# Use compression if available
+curl --compressed http://example.com
+
+# Similar with https://github.com/httpie/cli
+# Compress by default, prints response headers above the response body
+http http://example.com Header:Value

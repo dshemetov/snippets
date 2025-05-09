@@ -1,0 +1,7 @@
+# Generate a QR code from a URL
+# https://github.com/lincolnloop/python-qrcode
+# uv tool install qrcode
+qr "Some text" > test.png
+
+# Online tool if needed
+# https://fietkau.software/qr
